@@ -38,7 +38,12 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => 'Reply '.$m_message
+                                'text' => '小呆瓜說： '.$m_message .''
+                            ),
+                            array(
+                                'type' => 'sticker',
+                                'packageId' => 269,
+                                'stickerId' => 4
                             )
                         )
                     	));

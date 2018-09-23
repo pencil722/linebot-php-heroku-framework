@@ -43,12 +43,12 @@ foreach ($client->parseEvents() as $event) {
                             array(
                                 'type' => 'text',
                                 'text' => 'HELLO Thank you for message： '
+                            ),
+                            array(
+                                'type' => 'sticker',
+                                'packageId' => 269,
+                                'stickerId' => 4
                             )
-//                            array(
-//                                'type' => 'sticker',
-//                                'packageId' => 269,
-//                                'stickerId' => 4
-//                            )
                         )
                     	));
                 	}

@@ -48,6 +48,11 @@ foreach ($client->parseEvents() as $event) {
                                 'type' => 'sticker',
                                 'packageId' => '1',
                                 'stickerId' => '1'
+                            ),
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'http://www.newpalace.com.tw/images/logo.jpg',
+                                'previewImageUrl' => 'http://www.newpalace.com.tw/images/logo.jpg'
                             )
                         )
                     	));

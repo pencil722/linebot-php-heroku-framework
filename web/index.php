@@ -51,8 +51,8 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'https://reurl.cc/0Doyk',
-                                'previewImageUrl' => 'https://reurl.cc/0Doyk'
+                                'originalContentUrl' => 'https://b.blog.xuite.net/b/b/c/2/236293012/blog_3623231/txt/194697048/5.jpg',
+                                'previewImageUrl' => 'https://b.blog.xuite.net/b/b/c/2/236293012/blog_3623231/txt/194697048/5.jpg'
                             )
                         )
                     	));

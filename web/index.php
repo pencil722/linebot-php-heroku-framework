@@ -51,8 +51,8 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'https://drive.google.com/file/d/1-U_xakwX59zDsXPtPO_-8pQnY3WPvUgK/view',
-                                'previewImageUrl' => 'https://drive.google.com/file/d/1-U_xakwX59zDsXPtPO_-8pQnY3WPvUgK/view'
+                                'originalContentUrl' => 'https://drive.google.com/open?id=19KbHMdSwqsXKsG4ZP6llulKAhvkPnbwB',
+                                'previewImageUrl' => 'https://drive.google.com/open?id=19KbHMdSwqsXKsG4ZP6llulKAhvkPnbwB'
                             )
                         )
                     	));

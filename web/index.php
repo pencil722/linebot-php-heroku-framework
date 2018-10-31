@@ -51,8 +51,8 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'https://b.blog.xuite.net/b/b/c/2/236293012/blog_3623231/txt/194697048/5.jpg',
-                                'previewImageUrl' => 'https://b.blog.xuite.net/b/b/c/2/236293012/blog_3623231/txt/194697048/5.jpg'
+                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/DSC_0004.JPG',
+                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
                             )
                         )
                     	));

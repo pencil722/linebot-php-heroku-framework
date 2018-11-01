@@ -34,10 +34,11 @@ foreach ($client->parseEvents() as $event) {
                 	if($m_message!="")
                 	{
 					//get folder file numbers
+					$filecount = 0;
 					$directory = "images/marriage/";
-					if (glob($directory . "*.jpg") != false)
+					if (glob($directory . "*.JPG") != false)
 					{
-					 $filecount = count(glob($directory . "*.jpg"));
+					 $filecount = count(glob($directory . "*.JPG"));
 					 echo $filecount;
 					}
                 		$client->replyMessage(array(

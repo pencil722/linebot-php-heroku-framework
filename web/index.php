@@ -33,6 +33,13 @@ foreach ($client->parseEvents() as $event) {
                 	$m_message = $message['text'];
                 	if($m_message!="")
                 	{
+					//get folder file numbers
+					$directory = "../images/team/harry/";
+					if (glob($directory . "*.jpg") != false)
+					{
+					 $filecount = count(glob($directory . "*.jpg"));
+					 echo $filecount;
+					}
                 		$client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -42,7 +49,7 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'text',
-                                'text' => 'HELLO Thank you for message： '
+                                'text' => 'HELLO Thank you for message： '. $filecount
                             ),
                             array(
                                 'type' => 'sticker',

@@ -46,7 +46,7 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => '小呆瓜說： '. $m_message . $filecount . 
+                                'text' => '小呆瓜說： '. $m_message . $filecount
                             ),
                             array(
                                 'type' => 'sticker',

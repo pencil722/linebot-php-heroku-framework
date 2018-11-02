@@ -46,11 +46,7 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => '小呆瓜說： '.$m_message
-                            ),
-                            array(
-                                'type' => 'text',
-                                'text' => 'HELLO Thank you for message： '. $filecount
+                                'text' => '小呆瓜說： '. $m_message . $filecount . 
                             ),
                             array(
                                 'type' => 'sticker',
@@ -59,8 +55,18 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/DSC_0004.JPG',
+                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
                                 'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
+                            ),
+					array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG',
+                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
+                            ),
+					array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
+                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG'
                             )
                         )
                     	));
@@ -74,3 +80,12 @@ foreach ($client->parseEvents() as $event) {
             break;
     }
 };
+
+function marriagePicture(){
+	$pics = array(
+		'type' => 'image',
+		'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
+		'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
+	);
+	return 
+}

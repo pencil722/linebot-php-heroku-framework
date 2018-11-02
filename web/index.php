@@ -55,18 +55,8 @@ foreach ($client->parseEvents() as $event) {
                             ),
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
-                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
-                            ),
-					array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG',
-                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
-                            ),
-					array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
-                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG'
+                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
+                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_00001.JPG'
                             )
                         )
                     	));

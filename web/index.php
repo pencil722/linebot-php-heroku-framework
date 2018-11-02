@@ -87,5 +87,5 @@ function marriagePicture(){
 		'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
 		'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
 	);
-	return 
+	return $pics;
 }

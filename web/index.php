@@ -138,9 +138,9 @@ function marriageMap()
     );
     $location = array(
         'type' => 'location',
-        'title' => 'my location',
-        'address' => '新天地旗艦店',
-        'latitude' => 24.179097,
+        'title' => '新天地旗艦店',
+        'address' => '406台中市北屯區崇德五路345號',
+        'latitude' => 24.1792829,
         'longitude' => 120.6819703
 
     );

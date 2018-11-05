@@ -50,12 +50,19 @@ foreach ($client->parseEvents() as $event) {
                                 break;
                             default :
                                 //回貼圖
+                                $return_message = array(
+                                    'type' => 'sticker',
+                                    'packageId' => '1',
+                                    'stickerId' => '1'
+                                );
                                 break;
                         }
 
                         $client->replyMessage(array(
                             'replyToken' => $event['replyToken'],
-                            'messages' => $return_message
+                            'messages' => array(
+                                $return_message
+                            )
 
 //                        'messages' => array(
 //                            array(

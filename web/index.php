@@ -140,9 +140,26 @@ function marriageMap()
         'type' => 'location',
         'title' => '新天地旗艦店',
         'address' => '406台中市北屯區崇德五路345號',
-        'latitude' => 24.1792829,
-        'longitude' => 120.6819703
+        'latitude' => 24.179307,
+        'longitude' => 120.684116
 
     );
     return array($map, $location);
+}
+
+function loveSticker(){
+    $sticker_list = array(
+        array(
+            'type' => 'sticker',
+            'packageId' => '11539',
+            'stickerId' => '52114111'
+        ),
+        array(
+            'type' => 'sticker',
+            'packageId' => '1',
+            'stickerId' => '1'
+        )
+    );
+    $sticker = $sticker_list[0];
+    return array($sticker);
 }

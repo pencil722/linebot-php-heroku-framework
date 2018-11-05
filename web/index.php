@@ -19,7 +19,6 @@
 require_once('./LINEBotTiny.php');
 
 
-
 $channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
 
@@ -30,56 +29,55 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                	if($m_message!="")
-                	{
-					$m_message = $message['text'];
-					switch($m_message){
-						case '婚紗' :
-						case '婚紗照' :
-						case '照片' :
-							$return_message = marriagePicture();
-							break;
-						case '地圖' :
-						case '地點' :
-						case '餐廳地圖' :
-						case '餐廳地點' :
-						case '宴客場地' :
-							$return_message = marriageMap();
-							break;					
-						case '宴客資訊' :
-						case '活動訊息' :
-							$return_message = marriageInfo();
-							break;
-						default :
-							//回貼圖
-							break;
-					}
-					
-                		$client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-					'messages' => $return_message
-					/*
-                        'messages' => array(
-                            array(
-                                'type' => 'text',
-                                'text' => '小呆瓜說： '. $m_message . $filecount
-                            ),
-                            array(
-                                'type' => 'sticker',
-                                'packageId' => '1',
-                                'stickerId' => '1'
-                            ),
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
-                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_00001.JPG'
-                            )
-                        )
-						*/
-                    	));
-                	}
+                    $m_message = $message['text'];
+                    if ($m_message != "") {
+                        switch ($m_message) {
+                            case '婚紗' :
+                            case '婚紗照' :
+                            case '照片' :
+                                $return_message = marriagePicture();
+                                break;
+                            case '地圖' :
+                            case '地點' :
+                            case '餐廳地圖' :
+                            case '餐廳地點' :
+                            case '宴客場地' :
+                                $return_message = marriageMap();
+                                break;
+                            case '宴客資訊' :
+                            case '活動訊息' :
+                                $return_message = marriageInfo();
+                                break;
+                            default :
+                                //回貼圖
+                                break;
+                        }
+
+                        $client->replyMessage(array(
+                            'replyToken' => $event['replyToken'],
+                            'messages' => $return_message
+
+//                        'messages' => array(
+//                            array(
+//                                'type' => 'text',
+//                                'text' => '小呆瓜說： '. $m_message . $filecount
+//                            ),
+//                            array(
+//                                'type' => 'sticker',
+//                                'packageId' => '1',
+//                                'stickerId' => '1'
+//                            ),
+//                            array(
+//                                'type' => 'image',
+//                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
+//                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_00001.JPG'
+//                            )
+//                        )
+
+                        ));
+                    }
                     break;
-                
+
             }
             break;
         default:
@@ -88,33 +86,35 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function marriagePicture(){
-	//get folder file numbers
-	$filecount = 0;
-	$directory = "images/marriage/";
-	if (glob($directory . "*.JPG") != false)
-	{
-	 $filecount = count(glob($directory . "*.JPG"));
-	 //echo $filecount;
-	}
-	$pics = array(
-		'type' => 'image',
-		'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
-		'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
-	);
-	return $pics;
+function marriagePicture()
+{
+    //get folder file numbers
+    $filecount = 0;
+    $directory = "images/marriage/";
+    if (glob($directory . "*.JPG") != false) {
+        $filecount = count(glob($directory . "*.JPG"));
+        //echo $filecount;
+    }
+    $pics = array(
+        'type' => 'image',
+        'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
+        'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
+    );
+    return $pics;
 }
 
-function marriageInfo(){
-	array(
-		'type' => 'text',
-		'text' => '宴客地點 : 新天地'
-	)
+function marriageInfo()
+{
+    array(
+        'type' => 'text',
+        'text' => '宴客地點 : 新天地'
+    )
 }
 
-function marriageMap(){
-	array(
-		'type' => 'text',
-		'text' => '宴客地圖 : 新天地'
-	)
+function marriageMap()
+{
+    array(
+        'type' => 'text',
+        'text' => '宴客地圖 : 新天地'
+    )
 }

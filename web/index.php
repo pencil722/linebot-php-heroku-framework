@@ -60,9 +60,10 @@ foreach ($client->parseEvents() as $event) {
                                 break;
                         }
 
-                        $client->replyMessage(array(
-                            'replyToken' => $event['replyToken'],
-                            'messages' => $return_message
+                        $client->replyMessage(
+                            array(
+                                'replyToken' => $event['replyToken'],
+                                'messages' => $return_message
 
 
 //                        'messages' => array(
@@ -82,8 +83,23 @@ foreach ($client->parseEvents() as $event) {
 //                            )
 //                        )
 
-                        ));
+                            )
+                        );
                     }
+                    break;
+                case 'sticker' :
+                    $client->replyMessage(
+                        array(
+                            'replyToken' => $event['replyToken'],
+                            'messages' => array(
+                                array(
+                                    'type' => 'sticker',
+                                    'packageId' => $message['packageId'],
+                                    'stickerId' => $message['stickerId']
+                                )
+                            )
+                        )
+                    );
                     break;
 
             }
@@ -140,8 +156,8 @@ function marriageMap()
         'type' => 'location',
         'title' => '新天地旗艦店',
         'address' => '406台中市北屯區崇德五路345號',
-        'latitude' => 24.179307,
-        'longitude' => 120.684116
+        'latitude' => 24.179194,
+        'longitude' => 120.684127
 
     );
     return array($map, $location);

@@ -105,16 +105,18 @@ function marriagePicture()
 
 function marriageInfo()
 {
-    array(
+    $info = array(
         'type' => 'text',
         'text' => '宴客地點 : 新天地'
-    )
+    );
+    return $info;
 }
 
 function marriageMap()
 {
-    array(
+    $map = array(
         'type' => 'text',
         'text' => '宴客地圖 : 新天地'
-    )
+    );
+    return $map;
 }

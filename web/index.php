@@ -51,9 +51,11 @@ foreach ($client->parseEvents() as $event) {
                             default :
                                 //回貼圖
                                 $return_message = array(
-                                    'type' => 'sticker',
-                                    'packageId' => '1',
-                                    'stickerId' => '1'
+                                    array(
+                                        'type' => 'sticker',
+                                        'packageId' => '1',
+                                        'stickerId' => '1'
+                                    )
                                 );
                                 break;
                         }
@@ -123,7 +125,7 @@ function marriageInfo()
 {
     $info = array(
         'type' => 'text',
-        'text' => '宴客地點 : 新天地'
+        'text' => '宴客地點 : 新天地\n 宴客時間 ： 12/2(日) 中午'
     );
     return array($info);
 }
@@ -132,7 +134,7 @@ function marriageMap()
 {
     $map = array(
         'type' => 'text',
-        'text' => '宴客地圖 : 新天地'
+        'text' => 'https://www.google.com.tw/maps/place/%E6%96%B0%E5%A4%A9%E5%9C%B0%E9%A4%90%E9%A3%B2%E9%9B%86%E5%9C%98-%E6%97%97%E8%89%A6%E5%BA%97/@24.1791019,120.6819703,17z/data=!3m1!4b1!4m5!3m4!1s0x346917c15c7763e9:0xa1cc7f52b77c3f88!8m2!3d24.179097!4d120.684159?hl=zh-TW&authuser=0'
     );
     return array($map);
 }

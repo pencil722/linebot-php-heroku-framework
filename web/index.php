@@ -60,9 +60,8 @@ foreach ($client->parseEvents() as $event) {
 
                         $client->replyMessage(array(
                             'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                $return_message
-                            )
+                            'messages' => $return_message
+
 
 //                        'messages' => array(
 //                            array(
@@ -100,14 +99,24 @@ function marriagePicture()
     $directory = "images/marriage/";
     if (glob($directory . "*.JPG") != false) {
         $filecount = count(glob($directory . "*.JPG"));
-        //echo $filecount;
     }
+    $target = rand(1,$filecount);
+    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/marriage_%05d.JPG',$target);
+    $pic_url = array(
+        'type' => 'text',
+        'text' => $target_pic_url
+    );
+//    $pics = array(
+//        'type' => 'image',
+//        'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
+//        'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG'
+//    );
     $pics = array(
         'type' => 'image',
-        'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/ori_Image00001.JPG',
-        'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/pre_Image00001.JPG'
+        'originalContentUrl' => $target_pic_url,
+        'previewImageUrl' => $target_pic_url
     );
-    return $pics;
+    return array($pics, $pic_url);
 }
 
 function marriageInfo()
@@ -116,7 +125,7 @@ function marriageInfo()
         'type' => 'text',
         'text' => '宴客地點 : 新天地'
     );
-    return $info;
+    return array($info);
 }
 
 function marriageMap()
@@ -125,5 +134,5 @@ function marriageMap()
         'type' => 'text',
         'text' => '宴客地圖 : 新天地'
     );
-    return $map;
+    return array($map);
 }

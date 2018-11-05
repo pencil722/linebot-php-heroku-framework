@@ -53,8 +53,8 @@ foreach ($client->parseEvents() as $event) {
                                 $return_message = array(
                                     array(
                                         'type' => 'sticker',
-                                        'packageId' => '1',
-                                        'stickerId' => '1'
+                                        'packageId' => '11539',
+                                        'stickerId' => '52114111'
                                     )
                                 );
                                 break;
@@ -125,7 +125,7 @@ function marriageInfo()
 {
     $info = array(
         'type' => 'text',
-        'text' => "宴客地點 : 新天地\n 宴客時間 ： 12/2(日) 中午"
+        'text' => "宴客地點 : 新天地\n宴客時間 ： 12/2(日) 中午"
     );
     return array($info);
 }
@@ -139,9 +139,9 @@ function marriageMap()
     $location = array(
         'type' => 'location',
         'title' => 'my location',
-        'address' => '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
-        'latitude' => 35.65910807942215,
-        'longitude' => 139.70372892916203
+        'address' => '新天地旗艦店',
+        'latitude' => 24.179097,
+        'longitude' => 120.6819703
 
     );
     return array($map, $location);

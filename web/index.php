@@ -48,6 +48,11 @@ foreach ($client->parseEvents() as $event) {
                             case '活動訊息' :
                                 $return_message = marriageInfo();
                                 break;
+                            case '交通資訊' :
+                            case '交通方式' :
+                            case '交通' :
+                                $return_message = restaurantDirection();
+                                break;
                             default :
                                 //回貼圖
                                 $return_message = array(
@@ -178,4 +183,14 @@ function loveSticker(){
     );
     $sticker = $sticker_list[0];
     return array($sticker);
+}
+
+function restaurantDirection(){
+    $target_pic_url = 'https://linebot-php-test.herokuapp.com/images/direction_map.jpg';
+    $direction = array(
+        'type' => 'image',
+        'originalContentUrl' => $target_pic_url,
+        'previewImageUrl' => $target_pic_url
+    );
+    return array($direction);
 }

@@ -23,9 +23,11 @@ $conn = new mysqli($server, $username, $password, $db);
 $sql ="SELECT * FROM `line_messages_records`";
 if($result = $conn->query($sql)) {
     foreach($result as $row) {
+        var_dump($row);
 //...
     }
 } else {
+    var_dump('no result');
     throw new Exception($conn->error);
 }
 

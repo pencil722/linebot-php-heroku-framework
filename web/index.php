@@ -36,9 +36,14 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 //save input data to DB
 $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
 $request_data = $client->parseEvents();
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')",json_encode($request_data) , $now);
-$conn->query($query);
-$conn->close();
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)", json_encode($request_data), $now);
+try {
+    $conn->query($query);
+}
+catch (Exception $exception){
+    error_log("DB process error " . $exception->getMessage());
+}
+
 foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':
@@ -80,44 +85,15 @@ foreach ($client->parseEvents() as $event) {
                                 );
                                 break;
                         }
-
-                        $client->replyMessage(
-                            array(
-                                'replyToken' => $event['replyToken'],
-                                'messages' => $return_message
-
-
-//                        'messages' => array(
-//                            array(
-//                                'type' => 'text',
-//                                'text' => '小呆瓜說： '. $m_message . $filecount
-//                            ),
-//                            array(
-//                                'type' => 'sticker',
-//                                'packageId' => '1',
-//                                'stickerId' => '1'
-//                            ),
-//                            array(
-//                                'type' => 'image',
-//                                'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
-//                                'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_00001.JPG'
-//                            )
-//                        )
-
-                            )
-                        );
                     }
                     break;
                 case 'sticker' :
                     $client->replyMessage(
-                        array(
-                            'replyToken' => $event['replyToken'],
-                            'messages' => array(
-                                array(
-                                    'type' => 'sticker',
-                                    'packageId' => $message['packageId'],
-                                    'stickerId' => $message['stickerId']
-                                )
+                        $return_message = array(
+                            array(
+                                'type' => 'sticker',
+                                'packageId' => $message['packageId'],
+                                'stickerId' => $message['stickerId']
                             )
                         )
                     );
@@ -129,7 +105,44 @@ foreach ($client->parseEvents() as $event) {
             error_log("Unsupporeted event type: " . $event['type']);
             break;
     }
+    if (empty($return_message)) {
+        continue;
+    }
+    $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
+    $query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 2)", json_encode($return_message), $now);
+    try {
+        $conn->query($query);
+    }
+    catch (Exception $exception){
+        error_log("DB process error " . $exception->getMessage());
+    }
+
+    $client->replyMessage(
+        array(
+            'replyToken' => $event['replyToken'],
+            'messages' => $return_message
+
+//            'messages' => array(
+//                array(
+//                    'type' => 'text',
+//                    'text' => '小呆瓜說： ' . $m_message . $filecount
+//                ),
+//                array(
+//                    'type' => 'sticker',
+//                    'packageId' => '1',
+//                    'stickerId' => '1'
+//                ),
+//                array(
+//                    'type' => 'image',
+//                    'originalContentUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage/marriage_00001.JPG',
+//                    'previewImageUrl' => 'https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_00001.JPG'
+//                )
+//            )
+
+        )
+    );
 };
+$conn->close();
 
 function marriagePicture()
 {
@@ -139,8 +152,8 @@ function marriagePicture()
     if (glob($directory . "*.JPG") != false) {
         $filecount = count(glob($directory . "*.JPG"));
     }
-    $target = rand(1,$filecount);
-    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/marriage_%05d.JPG',$target);
+    $target = rand(1, $filecount);
+    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/marriage_%05d.JPG', $target);
     $pic_url = array(
         'type' => 'text',
         'text' => $target_pic_url
@@ -184,7 +197,8 @@ function marriageMap()
     return array($map, $location);
 }
 
-function loveSticker(){
+function loveSticker()
+{
     $sticker_list = array(
         array(
             'type' => 'sticker',
@@ -201,7 +215,8 @@ function loveSticker(){
     return array($sticker);
 }
 
-function restaurantDirection(){
+function restaurantDirection()
+{
     $target_pic_url = 'https://linebot-php-test.herokuapp.com/images/direction_map.jpg';
     $direction = array(
         'type' => 'image',

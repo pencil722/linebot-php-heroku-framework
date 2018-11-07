@@ -72,7 +72,7 @@ $request_str = json_encode($request_data);
 
 var_dump($request_str);
 
-$now = date('Y-m-d H:i:s');
+$now = date('Y-m-d H:i:s', strtotime('+8 hour'));
 var_dump($now);
 $content = '001';
 

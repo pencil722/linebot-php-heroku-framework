@@ -78,8 +78,12 @@ $content = '001';
 
 $query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $content, $now);
 
-if ($result = $conn->query($sql)) {
-    var_dump($result);
+var_dump($query);
+
+$query_static = "INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('001', '2018-11-07 00:10:06')";
+
+if ($conn->query($query) === true) {
+    var_dump('success');
 } else {
     var_dump('insert failed');
     throw new Exception($conn->error);

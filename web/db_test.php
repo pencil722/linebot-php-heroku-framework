@@ -33,7 +33,9 @@ if ($result = $conn->query($sql)) {
 
 var_dump('db connect finish');
 
-var_dump("\n\n\n");
+var_dump("new line\n\n\n");
+
+var_dump("new line<br /><br /><br />");
 
 //write data to db
 $request_data = array(
@@ -74,7 +76,7 @@ $now = date('Y-m-d H:i:s');
 var_dump($now);
 $content = '001';
 
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s', NULL)", $content, $now);
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $content, $now);
 
 if ($result = $conn->query($sql)) {
     var_dump($result);

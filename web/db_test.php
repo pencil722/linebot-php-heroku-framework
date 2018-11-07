@@ -76,7 +76,7 @@ $now = date('Y-m-d H:i:s');
 var_dump($now);
 $content = '001';
 
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $content, $now);
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $request_str, $now);
 
 var_dump($query);
 

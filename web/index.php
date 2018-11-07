@@ -35,7 +35,8 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 
 //save input data to DB
 $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $client->parseEvents(), $now);
+$request_data = $client->parseEvents();
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')",json_encode($request_data) , $now);
 $conn->query($query);
 $conn->close();
 foreach ($client->parseEvents() as $event) {

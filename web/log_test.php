@@ -14,6 +14,10 @@ var_dump($log_file_name);
 
 $file = fopen($log_file_name, 'a+');
 
+while($content = fgets($file)){
+    var_dump($content);
+}
+
 fwrite($file, 'this is a test');
 
 fclose($file);

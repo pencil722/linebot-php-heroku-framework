@@ -22,7 +22,22 @@ require_once('./LINEBotTiny.php');
 $channelAccessToken = getenv('LINE_CHANNEL_ACCESSTOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
 
+//set db connect
+$mysql_connect_str = getenv('CLEARDB_DATABASE_URL');
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+$conn = new mysqli($server, $username, $password, $db);
+
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
+
+//save input data to DB
+$now = date('Y-m-d H:i:s', strtotime('+8 hour'));
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`) VALUES ('%s', '%s')", $client->parseEvents(), $now);
+$conn->query($query);
+$conn->close();
 foreach ($client->parseEvents() as $event) {
     switch ($event['type']) {
         case 'message':

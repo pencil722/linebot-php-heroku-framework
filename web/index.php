@@ -53,26 +53,35 @@ foreach ($client->parseEvents() as $event) {
                     $m_message = $message['text'];
                     if ($m_message != "") {
                         switch ($m_message) {
-                            case '婚紗' :
-                            case '婚紗照' :
-                            case '照片' :
+//                            case '婚紗' :
+//                            case '婚紗照' :
+//                            case '照片' :
+                            case (preg_match("/(.?)+照片(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriagePicture();
                                 break;
-                            case '地圖' :
-                            case '地點' :
-                            case '餐廳地圖' :
-                            case '餐廳地點' :
-                            case '宴客場地' :
+//                            case '地圖' :
+//                            case '地點' :
+//                            case '餐廳地圖' :
+//                            case '餐廳地點' :
+//                            case '宴客場地' :
+                            case (preg_match("/(.?)+地點(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+地圖(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+map(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+場地(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriageMap();
                                 break;
-                            case '宴客資訊' :
+//                            case '宴客資訊' :
                             case '活動訊息' :
+                            case (preg_match("/(.?)+資訊(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+時間(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriageInfo();
                                 break;
-                            case '交通資訊' :
-                            case '交通方式' :
-                            case '交通' :
+//                            case '交通資訊' :
+//                            case '交通方式' :
+//                            case '交通' :
+                            case (preg_match("/(.?)+交通(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = restaurantDirection();
                                 break;
                             default :
@@ -169,14 +178,17 @@ function marriagePicture()
         'originalContentUrl' => $target_pic_url,
         'previewImageUrl' => $target_pic_url
     );
-    return array($pics, $pic_url);
+
+//    $return = array($pics, $pic_url);
+    $return = array($pics);
+    return $return;
 }
 
 function marriageInfo()
 {
     $info = array(
         'type' => 'text',
-        'text' => "宴客地點 : 新天地\n宴客時間 ： 12/2(日) 中午"
+        'text' => "宴客地點 : 新天地\n宴客時間 ： 12/2(日) 中午 12:00"
     );
     return array($info);
 }
@@ -189,13 +201,17 @@ function marriageMap()
     );
     $location = array(
         'type' => 'location',
-        'title' => '新天地旗艦店',
+        'title' => '新天地台中旗艦店',
         'address' => '406台中市北屯區崇德五路345號',
         'latitude' => 24.179194,
         'longitude' => 120.684127
 
     );
-    return array($map, $location);
+
+//    $return = array($map, $location);
+    $return = array($location);
+
+    return $return;
 }
 
 function loveSticker()

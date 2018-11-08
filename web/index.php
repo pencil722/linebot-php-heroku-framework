@@ -38,9 +38,9 @@ $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
 $request_data = $client->parseEvents();
 //為了解決中文亂碼問題，先作urlencode把中文轉掉，然後encode後再urldecode轉回中文
 $url_encode_data = urlencode($request_data);
-$json_encode_str = json_encode($encode_data);
+$json_encode_str = json_encode($encode_data, JSON_UNESCAPED_UNICODE);
 $url_decode_data = urldecode($json_encode_str);
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)",$url_decode_data , $now);
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)",json_encode($request_data, JSON_UNESCAPED_UNICODE) , $now);
 try {
     $conn->query($query);
 }
@@ -68,7 +68,7 @@ foreach ($client->parseEvents() as $event) {
                                 $url_encode_data = urlencode($message);
                                 $json_encode_str = json_encode($encode_data);
                                 $url_decode_data = urldecode($json_encode_str);
-                                $return_message = same_message($url_decode_data);
+                                $return_message = same_message(json_encode($m_message, JSON_UNESCAPED_UNICODE));
                                 break;
 //                            case '地圖' :
 //                            case '地點' :

@@ -131,7 +131,7 @@ foreach ($client->parseEvents() as $event) {
         continue;
     }
     $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
-    $query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 2)", json_encode($return_message), $now);
+    $query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 2)", json_encode($return_message, JSON_UNESCAPED_UNICODE), $now);
     try {
         $conn->query($query);
     } catch (Exception $exception) {
@@ -239,7 +239,10 @@ function loveSticker()
             'stickerId' => '1'
         )
     );
-    $sticker = $sticker_list[0];
+
+    $selected = rand(0, sizeof($sticker_list)-1);
+
+    $sticker = $sticker_list[$selected];
     return array($sticker);
 }
 

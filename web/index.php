@@ -60,7 +60,7 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriagePicture();
-//                                $return_message = same_message($m_message);
+                                $return_message = same_message($m_message);
                                 break;
 //                            case '地圖' :
 //                            case '地點' :
@@ -270,7 +270,7 @@ function inviteLetter()
 function same_message($message){
     $same_message = array(
         'type' => 'text',
-        'text' => $message
+        'text' => '12345'
     );
     $return = array($same_message);
 

@@ -61,7 +61,7 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriagePicture();
 //                                $return_message = same_message($m_message);
-                                $return_message = same_message('KIKI');
+                                $return_message = same_message($m_message);
                                 break;
 //                            case '地圖' :
 //                            case '地點' :

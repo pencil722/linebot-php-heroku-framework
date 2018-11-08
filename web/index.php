@@ -98,7 +98,7 @@ foreach ($client->parseEvents() as $event) {
                                         'stickerId' => '52114111'
                                     )
                                 );
-//                                $return_message = loveSticker();
+                                $return_message = loveSticker();
                                 break;
                         }
                     }

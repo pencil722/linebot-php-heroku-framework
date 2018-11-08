@@ -30,6 +30,7 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 $conn = new mysqli($server, $username, $password, $db);
+//設定連線使用utf8編碼，才不會有亂碼出現
 $conn->set_charset("utf8");
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
@@ -37,15 +38,12 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 //save input data to DB
 $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
 $request_data = $client->parseEvents();
-//為了解決中文亂碼問題，先作urlencode把中文轉掉，然後encode後再urldecode轉回中文
-$url_encode_data = urlencode($request_data);
-$json_encode_str = json_encode($encode_data, JSON_UNESCAPED_UNICODE);
-$url_decode_data = urldecode($json_encode_str);
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)",json_encode($request_data, JSON_UNESCAPED_UNICODE) , $now);
+//json_encode 加上JSON_UNESCAPED_UNICODE，讓它不要把中文字轉成unicode
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`)
+ VALUES ('%s', '%s', 1)", json_encode($request_data, JSON_UNESCAPED_UNICODE), $now);
 try {
     $conn->query($query);
-}
-catch (Exception $exception){
+} catch (Exception $exception) {
     error_log("DB process error " . $exception->getMessage());
 }
 
@@ -61,41 +59,36 @@ foreach ($client->parseEvents() as $event) {
 //                            case '婚紗' :
 //                            case '婚紗照' :
 //                            case '照片' :
-                            case (preg_match("/(.?)+照片(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+照片(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = marriagePicture();
-//                                $return_message = same_message($m_message);
-                                $url_encode_data = urlencode($message);
-                                $json_encode_str = json_encode($encode_data);
-                                $url_decode_data = urldecode($json_encode_str);
-                                $return_message = same_message(json_encode($m_message, JSON_UNESCAPED_UNICODE));
                                 break;
 //                            case '地圖' :
 //                            case '地點' :
 //                            case '餐廳地圖' :
 //                            case '餐廳地點' :
 //                            case '宴客場地' :
-                            case (preg_match("/(.?)+地點(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+地圖(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+map(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+場地(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+餐廳(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+地點(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+地圖(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+map(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+場地(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+餐廳(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = marriageMap();
                                 break;
 //                            case '宴客資訊' :
                             case '活動訊息' :
-                            case (preg_match("/(.?)+資訊(.?)+/i", $m_message) ? $m_message : !$m_message ):
-                            case (preg_match("/(.?)+時間(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+資訊(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+時間(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = marriageInfo();
                                 break;
 //                            case '交通資訊' :
 //                            case '交通方式' :
 //                            case '交通' :
-                            case (preg_match("/(.?)+交通(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+交通(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = restaurantDirection();
                                 break;
-                            case (preg_match("/(.?)+喜帖(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+喜帖(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = inviteLetter();
                                 break;
                             default :
@@ -137,8 +130,7 @@ foreach ($client->parseEvents() as $event) {
     $query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 2)", json_encode($return_message), $now);
     try {
         $conn->query($query);
-    }
-    catch (Exception $exception){
+    } catch (Exception $exception) {
         error_log("DB process error " . $exception->getMessage());
     }
 
@@ -276,7 +268,8 @@ function inviteLetter()
     return $return;
 }
 
-function same_message($message){
+function same_message($message)
+{
     $same_message = array(
         'type' => 'text',
         'text' => $message

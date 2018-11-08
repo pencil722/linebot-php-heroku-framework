@@ -235,14 +235,19 @@ function loveSticker()
         ),
         array(
             'type' => 'sticker',
-            'packageId' => '1',
-            'stickerId' => '1'
+            'packageId' => '2',
+            'stickerId' => '34'
+        ),
+        array(
+            'type' => 'sticker',
+            'packageId' => '3',
+            'stickerId' => '242'
         )
     );
 
     $selected = rand(0, sizeof($sticker_list)-1);
-
     $sticker = $sticker_list[$selected];
+
     return array($sticker);
 }
 
@@ -263,9 +268,17 @@ function thanksSticker()
             'type' => 'sticker',
             'packageId' => '11537',
             'stickerId' => '52002739'
+        ),
+        array(
+            'type' => 'sticker',
+            'packageId' => '2',
+            'stickerId' => '144'
         )
     );
-    $sticker = $sticker_list[0];
+
+    $selected = rand(0, sizeof($sticker_list)-1);
+    $sticker = $sticker_list[$selected];
+
     return array($sticker);
 }
 

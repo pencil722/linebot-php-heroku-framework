@@ -36,7 +36,11 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 //save input data to DB
 $now = date('Y-m-d H:i:s', strtotime('+8 hour'));
 $request_data = $client->parseEvents();
-$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)", json_encode($request_data), $now);
+//為了解決中文亂碼問題，先作urlencode把中文轉掉，然後encode後再urldecode轉回中文
+$url_encode_data = urlencode($request_data);
+$json_encode_str = json_encode($encode_data);
+$url_decode_data = urldecode($json_encode_str);
+$query = sprintf("INSERT INTO `line_messages_records` (`all_content`, `created_at`, `operate_type`) VALUES ('%s', '%s', 1)",$url_decode_data , $now);
 try {
     $conn->query($query);
 }
@@ -61,7 +65,10 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriagePicture();
 //                                $return_message = same_message($m_message);
-                                $return_message = same_message(json_encode($message));
+                                $url_encode_data = urlencode($message);
+                                $json_encode_str = json_encode($encode_data);
+                                $url_decode_data = urldecode($json_encode_str);
+                                $return_message = same_message($url_decode_data);
                                 break;
 //                            case '地圖' :
 //                            case '地點' :

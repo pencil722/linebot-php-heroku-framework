@@ -91,6 +91,10 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+喜帖(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = inviteLetter();
                                 break;
+                            case (preg_match("/(.?)+恭喜(.?)+/i", $m_message) ? $m_message : !$m_message):
+                            case (preg_match("/(.?)+祝福(.?)+/i", $m_message) ? $m_message : !$m_message):
+                                $return_message = thanksSticker();
+                                break;
                             default :
                                 //回貼圖
                                 $return_message = array(
@@ -233,6 +237,29 @@ function loveSticker()
             'type' => 'sticker',
             'packageId' => '1',
             'stickerId' => '1'
+        )
+    );
+    $sticker = $sticker_list[0];
+    return array($sticker);
+}
+
+function thanksSticker()
+{
+    $sticker_list = array(
+        array(
+            'type' => 'sticker',
+            'packageId' => '2',
+            'stickerId' => '41'
+        ),
+        array(
+            'type' => 'sticker',
+            'packageId' => '1',
+            'stickerId' => '407'
+        ),
+        array(
+            'type' => 'sticker',
+            'packageId' => '11537',
+            'stickerId' => '52002739'
         )
     );
     $sticker = $sticker_list[0];

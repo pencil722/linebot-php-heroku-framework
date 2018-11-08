@@ -59,8 +59,8 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+照片(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+pic(.?)+/i", $m_message) ? $m_message : !$m_message ):
-//                                $return_message = marriagePicture();
-                                $return_message = same_message($m_message);
+                                $return_message = marriagePicture();
+//                                $return_message = same_message($m_message);
                                 break;
 //                            case '地圖' :
 //                            case '地點' :
@@ -91,14 +91,14 @@ foreach ($client->parseEvents() as $event) {
                                 break;
                             default :
                                 //回貼圖
-//                                $return_message = array(
-//                                    array(
-//                                        'type' => 'sticker',
-//                                        'packageId' => '11539',
-//                                        'stickerId' => '52114111'
-//                                    )
-//                                );
-                                $return_message = loveSticker();
+                                $return_message = array(
+                                    array(
+                                        'type' => 'sticker',
+                                        'packageId' => '11539',
+                                        'stickerId' => '52114111'
+                                    )
+                                );
+//                                $return_message = loveSticker();
                                 break;
                         }
                     }

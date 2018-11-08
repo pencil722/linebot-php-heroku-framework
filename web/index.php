@@ -56,7 +56,7 @@ foreach ($client->parseEvents() as $event) {
                             case '婚紗' :
                             case '婚紗照' :
                             case '照片' :
-                            case preg_match("/(.?)+婚紗(.?)+/i", $m_message) :
+                            case (preg_match("/(.?)+婚紗(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriagePicture();
                                 break;
                             case '地圖' :

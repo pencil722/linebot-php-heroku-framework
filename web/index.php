@@ -70,6 +70,7 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+地圖(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+map(.?)+/i", $m_message) ? $m_message : !$m_message ):
                             case (preg_match("/(.?)+場地(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                            case (preg_match("/(.?)+餐廳(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = marriageMap();
                                 break;
 //                            case '宴客資訊' :
@@ -83,6 +84,9 @@ foreach ($client->parseEvents() as $event) {
 //                            case '交通' :
                             case (preg_match("/(.?)+交通(.?)+/i", $m_message) ? $m_message : !$m_message ):
                                 $return_message = restaurantDirection();
+                                break;
+                            case (preg_match("/(.?)+喜帖(.?)+/i", $m_message) ? $m_message : !$m_message ):
+                                $return_message = inviteLetter();
                                 break;
                             default :
                                 //回貼圖
@@ -241,4 +245,22 @@ function restaurantDirection()
         'previewImageUrl' => $target_pic_url
     );
     return array($direction);
+}
+
+function inviteLetter()
+{
+    $temp = array(
+        'type' => 'text',
+        'text' => 'https://www.google.com.tw/maps/place/%E6%96%B0%E5%A4%A9%E5%9C%B0%E9%A4%90%E9%A3%B2%E9%9B%86%E5%9C%98-%E6%97%97%E8%89%A6%E5%BA%97/@24.1791019,120.6819703,17z/data=!3m1!4b1!4m5!3m4!1s0x346917c15c7763e9:0xa1cc7f52b77c3f88!8m2!3d24.179097!4d120.684159?hl=zh-TW&authuser=0'
+    );
+    $target_pic_url = 'https://linebot-php-test.herokuapp.com/images/direction_map.jpg';
+    $direction = array(
+        'type' => 'image',
+        'originalContentUrl' => $target_pic_url,
+        'previewImageUrl' => $target_pic_url
+    );
+
+    $return = array($temp);
+
+    return $return;
 }

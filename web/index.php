@@ -169,12 +169,12 @@ function marriagePicture()
 {
     //get folder file numbers
     $filecount = 0;
-    $directory = "images/marriage/";
+    $directory = "images/marriages/";
     if (glob($directory . "*.JPG") != false) {
         $filecount = count(glob($directory . "*.JPG"));
     }
     $target = rand(1, $filecount);
-    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/marriage_%05d.JPG', $target);
+    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriages/marriage_%05d.JPG', $target);
     $pic_url = array(
         'type' => 'text',
         'text' => $target_pic_url

@@ -14,11 +14,13 @@ if (glob($directory . "*.JPG") != false) {
     $filecount = count(glob($directory . "*.JPG"));
 }
 
-foreach (glob($directory. "*.txt") as $filename) {
+foreach (glob($directory. "*.JPG") as $filename) {
     echo "$filename \n";
     $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/%s', $filename);
     echo "<img src = '$target_pic_url'></img>";
 }
+
+
 
 var_dump('123');
 

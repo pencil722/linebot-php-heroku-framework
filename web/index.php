@@ -190,8 +190,8 @@ function marriagePicture()
         'previewImageUrl' => $target_pic_url
     );
 
-//    $return = array($pics, $pic_url);
-    $return = array($pics);
+    $return = array($pics, $pic_url);
+//    $return = array($pics);
     return $return;
 }
 

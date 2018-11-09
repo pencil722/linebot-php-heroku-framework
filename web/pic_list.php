@@ -16,7 +16,7 @@ if (glob($directory . "*.JPG") != false) {
 
 foreach (glob($directory. "*.JPG") as $filename) {
     echo "$filename \n";
-    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage/%s', $filename);
+    $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/%s', $filename);
     echo "<img src = '$target_pic_url'></img>";
 }
 

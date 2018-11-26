@@ -200,7 +200,7 @@ function marriageInfo()
 {
     $info = array(
         'type' => 'text',
-        'text' => "宴客地點 : 新天地\n宴客時間 ： 12/2(日) 中午 12:00"
+        'text' => "宴客地點 : 新天地\n宴客時間 : 12/2(日) 中午 12:00"
     );
     return array($info);
 }

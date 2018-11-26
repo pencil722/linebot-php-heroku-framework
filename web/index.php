@@ -175,6 +175,7 @@ function marriagePicture()
     }
     $target = rand(1, $filecount);
     $target_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriages/marriage_%05d.JPG', $target);
+	$target_pre_pic_url = sprintf('https://linebot-php-test.herokuapp.com/images/marriage_pre/pre_marriage_%05d.JPG', $target);
     $pic_url = array(
         'type' => 'text',
         'text' => $target_pic_url
@@ -187,7 +188,7 @@ function marriagePicture()
     $pics = array(
         'type' => 'image',
         'originalContentUrl' => $target_pic_url,
-        'previewImageUrl' => $target_pic_url
+        'previewImageUrl' => $target_pre_pic_url
     );
 
 //    $return = array($pics, $pic_url);

@@ -26,9 +26,26 @@ try {
 
 
 if($result->num_rows > 0){
-	//output data of each row
+	echo '<table border = 1>';
+	echo '<tr><td>send</td><td>reply</td></tr>';
+	//output data of each row	
 	while($row = $result->fetch_assoc()){
-		var_dump($row);
+		echo '<tr>';
+		//var_dump($row);
+		$all_content = json_decode($row['all_content'], true);
+		if($row['operate_type'] == 1){
+			echo '<td>';
+			var_dump($all_content);
+			echo '</td>';
+		}
+		if($row['operate_type'] == 2){
+			echo '<td></td>';
+			echo '<td>';
+			var_dump($all_content);
+			echo '</td>';
+		}
+		echo '</tr>';
 	}
+	echo '</table>';
 }
 

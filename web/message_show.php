@@ -35,12 +35,25 @@ if($result->num_rows > 0){
 		$all_content = json_decode($row['all_content'], true);
 		if($row['operate_type'] == 1){
 			echo '<td>';
-			var_dump($all_content);
+			//var_dump($all_content);
 			echo '<br \>';
 			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
 			foreach($all_content as $content){
-				if($content['type'] == 'message'){
-					//取得訊息發送者顯示名稱
+				//取得訊息發送者顯示名稱
+				$userId = $content['source']['userId']
+				$userProfile = getUserProfile($userId, $channelAccessToken);
+				var_dump($userProfile);
+				if($content['type'] === 'message'){
+					//var_dump
+					$messageArr = $content['message'];
+					if($messageArr['type'] === 'message'){
+						echo $textMessage;
+						continue;
+					}
+					if($messageArr['type'] === 'sticker'){
+						echo "sticker";
+						continue;
+					}
 				}
 				else{
 					echo "other content : ".$content['type'];
@@ -68,14 +81,14 @@ function getUserProfile($userId, $channelAccessToken){
         );
 
         $context = stream_context_create(array(
-            "https" => array(
+            "http" => array(
                 "method" => "GET",
                 "header" => implode("\r\n", $header),
                 "content" => '',
             ),
         ));
 
-        $response = file_get_contents('https://api.line.me/v2/bot/message/reply', false, $context);
+        $response = file_get_contents('https://api.line.me/v2/bot/profile/'. $userId, false, $context);
         if (strpos($http_response_header[0], '200') === false) {
             #http_response_code(500);
             error_log("Request failed: " . $response);

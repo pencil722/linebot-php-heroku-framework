@@ -35,7 +35,7 @@ if($result->num_rows > 0){
 		$all_content = json_decode($row['all_content'], true);
 		if($row['operate_type'] == 1){
 			echo '<td>';
-			//var_dump($all_content);
+			var_dump($all_content);
 			echo '<br \>';
 			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
 			foreach($all_content as $content){
@@ -43,7 +43,7 @@ if($result->num_rows > 0){
 				$userId = $content['source']['userId']
 				//$userProfile = getUserProfile($userId, $channelAccessToken);
 				//var_dump($userProfile);
-				echo $userId."&amp";
+				echo $userId;
 				if($content['type'] === 'message'){
 					//var_dump
 					$messageArr = $content['message'];

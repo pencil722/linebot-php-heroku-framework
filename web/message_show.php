@@ -79,6 +79,7 @@ try {
 
 // sender version
 if($result->num_rows > 0){
+    echo '<h1>發送訊息者列表</h1>';
     echo '<table border = 1>';
     echo '<tr><td>sender</td><td>message</td></tr>';
     //output data of each row

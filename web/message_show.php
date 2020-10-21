@@ -95,5 +95,6 @@ function getUserProfile($userId, $channelAccessToken){
             #http_response_code(500);
             error_log("Request failed: " . $response);
         }
+        return $response;
 }
 

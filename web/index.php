@@ -338,7 +338,7 @@ function functionList()
     $functionListText = implode('\\n', $functional);
     $info = array(
         'type' => 'text',
-        'text' => "可用功能\n $functionListText"
+        'text' => "可用功能\n 照片, 婚紗, pic\n 地點, 地圖, map, 場地, 餐廳\n 資訊, 時間\n 交通\n 喜帖"
     );
     return array($info);
 }

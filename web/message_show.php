@@ -24,57 +24,105 @@ try {
     error_log("DB process error " . $exception->getMessage());
 }
 
-
-if($result->num_rows > 0){
-	echo '<table border = 1>';
-	echo '<tr><td>send</td><td>reply</td></tr>';
-	//output data of each row	
-	while($row = $result->fetch_assoc()){
-		echo '<tr>';
-		//var_dump($row);
-		$all_content = json_decode($row['all_content'], true);
-		if($row['operate_type'] == 1){
-			echo '<td>';
+// all version
+//if($result->num_rows > 0){
+//	echo '<table border = 1>';
+//	echo '<tr><td>send</td><td>reply</td></tr>';
+//	//output data of each row
+//	while($row = $result->fetch_assoc()){
+//		echo '<tr>';
+//		//var_dump($row);
+//		$all_content = json_decode($row['all_content'], true);
+//		if($row['operate_type'] == 1){
+//			echo '<td>';
+////			var_dump($all_content);
+//			echo '<br />';
+//			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
+//			foreach($all_content as $content){
+////			    var_dump($content);
+//				//取得訊息發送者顯示名稱
+//				$userId = $content['source']['userId'];
+//				$userProfile = getUserProfile($userId, $channelAccessToken);
+////				var_dump($userProfile);
+//                $pic = $userProfile['pictureUrl'];
+//                echo "<img src = '$pic' width='150'/>";
+//				echo $userProfile['displayName']. ' : ';
+////				echo $userId;
+//				if($content['type'] === 'message'){
+//					//var_dump
+//					$messageArr = $content['message'];
+//					if($messageArr['type'] === 'text'){
+//						echo $messageArr['text'];
+//						continue;
+//					}
+//					if($messageArr['type'] === 'sticker'){
+//						echo "sticker";
+//						continue;
+//					}
+//				}
+//				else{
+//					echo "other content : ".$content['type'];
+//				}
+//			}
+//			echo '</td>';
+//		}
+//		if($row['operate_type'] == 2){
+//			echo '<td></td>';
+//			echo '<td>';
 //			var_dump($all_content);
-			echo '<br />';
-			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
-			foreach($all_content as $content){
+//			echo '</td>';
+//		}
+//		echo '</tr>';
+//	}
+//	echo '</table>';
+//}
+
+// sender version
+if($result->num_rows > 0){
+    echo '<table border = 1>';
+    echo '<tr><td>sender</td><td>message</td></tr>';
+    //output data of each row
+    while($row = $result->fetch_assoc()){
+        echo '<tr>';
+        //var_dump($row);
+        $all_content = json_decode($row['all_content'], true);
+        if($row['operate_type'] == 1){
+//			var_dump($all_content);
+//            echo '<br />';
+            //取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
+            foreach($all_content as $content){
 //			    var_dump($content);
-				//取得訊息發送者顯示名稱
-				$userId = $content['source']['userId'];
-				$userProfile = getUserProfile($userId, $channelAccessToken);
+                echo '<td>';
+                //取得訊息發送者顯示名稱
+                $userId = $content['source']['userId'];
+                $userProfile = getUserProfile($userId, $channelAccessToken);
 //				var_dump($userProfile);
                 $pic = $userProfile['pictureUrl'];
-                echo "<img src = '$pic' />";
-				echo $userProfile['displayName']. ' : ';
-//				echo $userId;
-				if($content['type'] === 'message'){
-					//var_dump
-					$messageArr = $content['message'];
-					if($messageArr['type'] === 'text'){
-						echo $messageArr['text'];
-						continue;
-					}
-					if($messageArr['type'] === 'sticker'){
-						echo "sticker";
-						continue;
-					}
-				}
-				else{
-					echo "other content : ".$content['type'];
-				}
-			}
-			echo '</td>';
-		}
-		if($row['operate_type'] == 2){
-			echo '<td></td>';
-			echo '<td>';
-			var_dump($all_content);
-			echo '</td>';
-		}
-		echo '</tr>';
-	}
-	echo '</table>';
+                echo "<img src = '$pic' width='150'/>";
+                echo $userProfile['displayName']. ' : ';
+                echo '</td>';
+                echo '<td>';
+                if($content['type'] === 'message'){
+                    //var_dump
+                    $messageArr = $content['message'];
+                    if($messageArr['type'] === 'text'){
+                        echo $messageArr['text'];
+                        continue;
+                    }
+                    if($messageArr['type'] === 'sticker'){
+                        echo "sticker";
+                        continue;
+                    }
+                }
+                else{
+                    echo "other content : ".$content['type'];
+                }
+                echo '</td>';
+            }
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
 }
 
 $conn->close();

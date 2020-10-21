@@ -44,7 +44,7 @@ if($result->num_rows > 0){
 				$userId = $content['source']['userId'];
 				$userProfile = getUserProfile($userId, $channelAccessToken);
 				var_dump($userProfile);
-				echo $userProfile['displayName'].':';
+				echo $userProfile['displayName'];
 				echo $userId;
 				if($content['type'] === 'message'){
 					//var_dump

@@ -35,21 +35,22 @@ if($result->num_rows > 0){
 		$all_content = json_decode($row['all_content'], true);
 		if($row['operate_type'] == 1){
 			echo '<td>';
-			var_dump($all_content);
+//			var_dump($all_content);
 			echo '<br>';
 			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
 			foreach($all_content as $content){
-//			    var_dump($content);
+			    var_dump($content);
 				//取得訊息發送者顯示名稱
 				$userId = $content['source']['userId'];
 				$userProfile = getUserProfile($userId, $channelAccessToken);
 				var_dump($userProfile);
+				echo $userProfile['displayName'].':'
 				echo $userId;
 				if($content['type'] === 'message'){
 					//var_dump
 					$messageArr = $content['message'];
-					if($messageArr['type'] === 'message'){
-						echo $textMessage;
+					if($messageArr['type'] === 'text'){
+						echo $messageArr['text'];
 						continue;
 					}
 					if($messageArr['type'] === 'sticker'){
@@ -95,6 +96,6 @@ function getUserProfile($userId, $channelAccessToken){
             #http_response_code(500);
             error_log("Request failed: " . $response);
         }
-        return $response;
+        return json_decode($response);
 }
 

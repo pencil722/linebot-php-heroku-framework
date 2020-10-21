@@ -39,27 +39,27 @@ if($result->num_rows > 0){
 			echo '<br>';
 			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
 			foreach($all_content as $content){
-			    var_dump($content);
+//			    var_dump($content);
 				//取得訊息發送者顯示名稱
-//				$userId = $content['source']['userId']
-//				//$userProfile = getUserProfile($userId, $channelAccessToken);
-//				//var_dump($userProfile);
-//				echo $userId;
-//				if($content['type'] === 'message'){
-//					//var_dump
-//					$messageArr = $content['message'];
-//					if($messageArr['type'] === 'message'){
-//						echo $textMessage;
-//						continue;
-//					}
-//					if($messageArr['type'] === 'sticker'){
-//						echo "sticker";
-//						continue;
-//					}
-//				}
-//				else{
-//					echo "other content : ".$content['type'];
-//				}
+				$userId = $content['source']['userId'];
+				//$userProfile = getUserProfile($userId, $channelAccessToken);
+				//var_dump($userProfile);
+				echo $userId;
+				if($content['type'] === 'message'){
+					//var_dump
+					$messageArr = $content['message'];
+					if($messageArr['type'] === 'message'){
+						echo $textMessage;
+						continue;
+					}
+					if($messageArr['type'] === 'sticker'){
+						echo "sticker";
+						continue;
+					}
+				}
+				else{
+					echo "other content : ".$content['type'];
+				}
 			}
 			echo '</td>';
 		}

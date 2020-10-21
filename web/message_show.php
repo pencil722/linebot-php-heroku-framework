@@ -97,10 +97,11 @@ if($result->num_rows > 0){
                 //取得訊息發送者顯示名稱
                 $userId = $content['source']['userId'];
                 $userProfile = getUserProfile($userId, $channelAccessToken);
-//				var_dump($userProfile);
-                $pic = $userProfile['pictureUrl'];
+			 var_dump($userProfile);
+                $pic = $userProfile['pictureUrl'] ?? '';
                 echo "<img src = '$pic' width='150'/>";
-                echo $userProfile['displayName']. ' : ';
+			 $userName = $userProfile['displayName'] ?? 'unknown';
+                echo $userName . ' : ';
                 echo '</td>';
                 echo '<td>';
                 if($content['type'] === 'message'){

@@ -97,8 +97,7 @@ if($result->num_rows > 0){
                 //取得訊息發送者顯示名稱
                 $userId = $content['source']['userId'];
                 $userProfile = getUserProfile($userId, $channelAccessToken);
-			 var_dump($userProfile);
-                $pic = $userProfile['pictureUrl'] ?? '';
+			 $pic = $userProfile['pictureUrl'] ?? '';
                 echo "<img src = '$pic' width='150'/>";
 			 $userName = $userProfile['displayName'] ?? 'unknown';
                 echo $userName . ' : ';
@@ -131,23 +130,38 @@ $conn->close();
 
 function getUserProfile($userId, $channelAccessToken){
 	$header = array(
-            "Content-Type: application/json",
-            'Authorization: Bearer ' . $channelAccessToken,
-        );
+		"Content-Type: application/json",
+		'Authorization: Bearer ' . $channelAccessToken,
+	);
+	
+	$url = 'https://api.line.me/v2/bot/profile/'. $userId;
+	
+	// curl 
+	$cURLConnection = curl_init();
+	curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, $header);
+	curl_setopt($cURLConnection, CURLOPT_URL, $url);
+	curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+	$apiResponse = curl_exec($cURLConnection);
+	if($apiResponse === false){
+		#http_response_code(500);
+		error_log("Request failed: " . curl_error($cURLConnection));
+	}
+	curl_close($cURLConnection);
+	return json_decode($apiResponse, true);
 
-        $context = stream_context_create(array(
-            "http" => array(
-                "method" => "GET",
-                "header" => implode("\r\n", $header),
-                "content" => '',
-            ),
-        ));
+	// $context = stream_context_create(array(
+		// "http" => array(
+			// "method" => "GET",
+			// "header" => implode("\r\n", $header),
+			// "content" => '',
+		// ),
+	// ));
 
-        $response = file_get_contents('https://api.line.me/v2/bot/profile/'. $userId, false, $context);
-        if (strpos($http_response_header[0], '200') === false) {
-            #http_response_code(500);
-            error_log("Request failed: " . $response);
-        }
-        return json_decode($response, true);
+	// $response = file_get_contents($url, false, $context);
+	// if (strpos($http_response_header[0], '200') === false) {
+		// #http_response_code(500);
+		// error_log("Request failed: " . $response);
+	// }
+	// return json_decode($response, true);
 }
 

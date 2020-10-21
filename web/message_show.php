@@ -43,7 +43,7 @@ if($result->num_rows > 0){
 				//取得訊息發送者顯示名稱
 				$userId = $content['source']['userId'];
 				$userProfile = getUserProfile($userId, $channelAccessToken);
-				var_dump($userProfile);
+//				var_dump($userProfile);
 				echo $userProfile['displayName'];
 				echo $userId;
 				if($content['type'] === 'message'){

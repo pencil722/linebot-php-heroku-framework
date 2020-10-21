@@ -335,10 +335,10 @@ function functionList()
         '交通',
         '喜帖'
     ];
-    $functionListText = implode('\n', $functional);
+    $functionListText = implode('\\n', $functional);
     $info = array(
         'type' => 'text',
-        'text' => "可用功能\n$functionListText"
+        'text' => "可用功能\n $functionListText"
     );
     return array($info);
 }

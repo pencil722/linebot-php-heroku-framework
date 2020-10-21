@@ -142,6 +142,7 @@ function getUserProfile($userId, $channelAccessToken){
 	curl_setopt($cURLConnection, CURLOPT_URL, $url);
 	curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 	$apiResponse = curl_exec($cURLConnection);
+	var_dump($apiResponse);
 	if($apiResponse === false){
 		#http_response_code(500);
 		error_log("Request failed: " . curl_error($cURLConnection));

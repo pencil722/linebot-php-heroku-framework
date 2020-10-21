@@ -36,10 +36,11 @@ if($result->num_rows > 0){
 		if($row['operate_type'] == 1){
 			echo '<td>';
 			var_dump($all_content);
-//			echo '<br \>';
-//			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
-//			foreach($all_content as $content){
-//				//取得訊息發送者顯示名稱
+			echo '<br>';
+			//取出該筆對話的第一筆傳送內容，因為允許一次可以傳送多筆內容
+			foreach($all_content as $content){
+			    var_dump($content);
+				//取得訊息發送者顯示名稱
 //				$userId = $content['source']['userId']
 //				//$userProfile = getUserProfile($userId, $channelAccessToken);
 //				//var_dump($userProfile);
@@ -59,7 +60,7 @@ if($result->num_rows > 0){
 //				else{
 //					echo "other content : ".$content['type'];
 //				}
-//			}
+			}
 			echo '</td>';
 		}
 		if($row['operate_type'] == 2){

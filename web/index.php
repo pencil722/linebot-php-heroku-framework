@@ -95,6 +95,9 @@ foreach ($client->parseEvents() as $event) {
                             case (preg_match("/(.?)+祝福(.?)+/i", $m_message) ? $m_message : !$m_message):
                                 $return_message = thanksSticker();
                                 break;
+                            case '功能':
+                                $return_message = functionList();
+                                break;
                             default :
                                 //回貼圖
                                 $return_message = array(
@@ -321,4 +324,21 @@ function same_message($message)
     $return = array($same_message);
 
     return $return;
+}
+
+function functionList()
+{
+    $functional = [
+        '照片, 婚紗, pic',
+        '地點, 地圖, map, 場地, 餐廳',
+        '資訊, 時間',
+        '交通',
+        '喜帖'
+    ];
+    $functionListText = implode('\n', $functional);
+    $info = array(
+        'type' => 'text',
+        'text' => "可用功能\n$functionListText"
+    );
+    return array($info);
 }
